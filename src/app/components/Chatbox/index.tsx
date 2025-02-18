@@ -10,6 +10,10 @@ export default function ChatboxLayout() {
   const [messages, setMessages] = useState<any[]>([]); // 用于存储聊天消息
   const modelName = "2.0 Flash Thinking Experimental"; // 这里可以通过 props 或 context 传入
 
+  const handleSendMessage = (message: string) => {
+    setMessages((prev) => [...prev, { content: message, role: "user" }]);
+  };
+
   return (
     <div className="h-screen flex flex-col">
       <Header />
@@ -34,7 +38,10 @@ export default function ChatboxLayout() {
           {/* 输入框和提示语容器 */}
           <div className="absolute bottom-0 left-0 right-0 z-50">
             <div className="bg-gradient-to-t from-[#1F1F1F] via-[#1F1F1F] to-transparent pb-4 pt-10">
-              <ChatInput modelName={modelName} />
+              <ChatInput
+                modelName={modelName}
+                onSendMessage={handleSendMessage}
+              />
             </div>
           </div>
         </main>
